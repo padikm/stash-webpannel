@@ -1,0 +1,16 @@
+{namespace com.mycompany.todo}
+
+/**
+ * @param count The count of TODOs in this PR.
+ */
+{template .prOverviewPanel}
+    {call stash.feature.pullRequest.relatedEntitiesWebPanel}
+        {param linkText: $count == 1 ? 'TODO' : 'TODOs' /}
+        {param linkHref: '#' /}
+        {param iconClass: 'todo-icon' /}
+        {param count: $count /}
+        {param extraClasses: 'mycompany-todos-link'  /}
+    {/call}
+{/template}
+
+

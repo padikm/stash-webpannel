@@ -1,0 +1,32 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+    <web-resource key="pr-overview-resources">
+
+        <transformation extension="soy">
+            <transformer key="soyTransformer" />
+        </transformation>
+
+        <transformation extension="less">
+            <transformer key="lessTransformer" />
+        </transformation>
+
+        <resource type="download" name="pull-request-overview.soy.js" location="/soy/pull-request-overview.soy" />
+        <resource type="download" name="pull-request-overview.js" location="/js/pull-request-overview.js" />
+        <resource type="download" name="pull-request-overview.css" location="/css/pull-request-overview.less" />
+
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <dependency>com.atlassian.stash.stash-web-api:pull-request-web-panels</dependency>
+    </web-resource>
+
+    <client-web-panel name="PR TODOs link" key="pr-overview-todo-panel" location="stash.pull-request.related-entities" weight="2000">
+        <client-context-provider>MyCompany.TODO.getTODOStats</client-context-provider>
+        <resource name="view" type="soy" location="com.emc.stash.plugin.stash-example-pull-request-plugin:pr-overview-resources/com.mycompany.todo.prOverviewPanel" />
+        <dependency>com.emc.stash.plugin.stash-example-pull-request-plugin:pr-overview-resources</dependency>
+    </client-web-panel>
+
+</atlassian-plugin>
